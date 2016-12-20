@@ -1,0 +1,6 @@
+{
+  "name": "test",
+  "chromium-args": "--allow-running-insecure-content --ignore-certificate-errors",
+  "version": "0.1.0",
+  "main": "index.html"
+}

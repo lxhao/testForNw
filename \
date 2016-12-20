@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>nw.js实现文件读写</title>
+</head>
+
+<body>
+
+    <input  id="readFile" type="file" >读取文件</input>
+     <!-- 默认文件名为filename.html -->
+     <br/>
+     <br/>
+     <br/>
+     <input id="writeFile" nwsaveas="filename.html"  type="file">保存文件</input>
+     <p></p>
+
+     <script>
+        //nw.js提供的读写文件模块
+        var fs = require("fs");
+        //读文件
+        var chooser = document.querySelector('#readFile');
+        chooser.addEventListener("change", function (evt) {
+               //用户选择的文件
+               var filePath = this.value.toString();
+               document.querySelector("p").innerHTML = "读取文件从" + filePath;
+               fs.readFile(filePath, function (err, data) {
+                   if (err) {
+                       layer.msg("读取文件失败! :" + err.message);
+                       return;
+                   } else {
+                       console.log(data);
+                       alert(data);
+                   }
+               })
+           });
+
+        //写文件
+        chooser = document.querySelector('#writeFile');
+        chooser.addEventListener("change", function (evt) {
+               //用户选择的文件
+               var filePath = this.value.toString();
+               document.querySelector("p").innerHTML = "写入文件到：" + filePath;
+               //把hello写入文件
+               fs.writeFile(filePath, "Hello!\n", function (err) {
+                   if (err) {
+                       alert("保存失败!");
+                   }
+               });  
+           });
+     </script>
+
+</body>
+</html>
